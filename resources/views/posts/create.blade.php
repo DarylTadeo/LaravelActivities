@@ -7,7 +7,7 @@
             <div class="card">       
                 <div class="card-header">New Post</div>
                 <div class="card-body">
-                    <form method="POST" action="/posts">
+                    <form method="POST" enctype='multipart/form-data' action="/posts">
                         @csrf
                         
                         <div class="form-group row">
@@ -25,6 +25,21 @@
                             </div>
                         </div>
                         
+                        <div class="form-group row">
+                            <label for="img" class="col-md-4 col-form-label text-md-right">{{ __('Upload Image') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="file" class="form-control-file @error('img') is-invalid @enderror" name="img" value="{{ old('img') }}"  autocomplete="img">
+                            </div>
+
+                            @error('img')
+                                <span class="invalid-feedback" role="alert"> 
+                                    {{ $message }}
+                                </span>                            
+                             @enderror
+
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
